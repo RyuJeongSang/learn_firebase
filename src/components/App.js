@@ -18,7 +18,7 @@ function App() {
   return (
     <>
       {init ? <AppRouter isLoggedIn={isLoggedIn} /> : "Initializing..."}
-      <footer>&copy; {new Date().getFullYear()} asdfasdf</footer>
+      <footer>&copy; {new Date().getFullYear()} Simple Sns</footer>
     </>
   );
 }
