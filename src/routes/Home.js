@@ -1,14 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { dbService } from "../fBase";
 
-const Home = () => {
+const Home = ({ userObj }) => {
   const [fbPost, setFbPost] = useState("");
   const [fbPosts, setFbPosts] = useState([]);
+
+  useEffect(() => {
+    dbService.collection("fbPosts").onSnapshot((snapshot) => {
+      const fbPostArray = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setFbPosts(fbPostArray);
+    });
+  }, []);
   const onSubmit = async (event) => {
     event.preventDefault();
     await dbService.collection("fbPosts").add({
-      fbPost,
+      text: fbPost,
       createdAt: Date.now(),
+      creatorId: userObj.uid,
     });
     setFbPost("");
   };
@@ -19,7 +30,7 @@ const Home = () => {
     setFbPost(value);
   };
   return (
-    <span>
+    <div>
       <form onSubmit={onSubmit}>
         <input
           value={fbPost}
@@ -31,7 +42,14 @@ const Home = () => {
         />
         <input type="submit" value="Bring Out!" />
       </form>
-    </span>
+      <div>
+        {fbPosts.map((fbPost) => (
+          <div key={fbPost.id}>
+            <h4>{fbPost.text}</h4>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 
