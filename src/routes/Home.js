@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { dbService } from "../fBase";
+import FbPost from "components/FbPost";
 
 const Home = ({ userObj }) => {
   const [fbPost, setFbPost] = useState("");
@@ -44,9 +45,11 @@ const Home = ({ userObj }) => {
       </form>
       <div>
         {fbPosts.map((fbPost) => (
-          <div key={fbPost.id}>
-            <h4>{fbPost.text}</h4>
-          </div>
+          <FbPost
+            key={fbPost.id}
+            fbPostObj={fbPost}
+            isOwner={fbPost.creatorId === userObj.uid}
+          />
         ))}
       </div>
     </div>
