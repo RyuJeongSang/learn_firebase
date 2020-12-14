@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { dbService } from "../fBase";
+import { dbService, storageService } from "../fBase";
 
 const FbPost = ({ fbPostObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
@@ -8,6 +8,7 @@ const FbPost = ({ fbPostObj, isOwner }) => {
     const ok = window.confirm("delete this?");
     if (ok) {
       await dbService.doc(`fbPosts/${fbPostObj.id}`).delete();
+      await storageService.refFromURL(fbPostObj.attachmentUrl).delete();
     }
   };
   const toggleEditing = () => setEditing((prev) => !prev);
@@ -26,7 +27,7 @@ const FbPost = ({ fbPostObj, isOwner }) => {
   };
   return (
     <div key={fbPostObj.id}>
-      {editing ? (
+      {editing && isOwner ? (
         <>
           <form onSubmit={onSubmit}>
             <input
@@ -43,6 +44,14 @@ const FbPost = ({ fbPostObj, isOwner }) => {
       ) : (
         <>
           <h4>{fbPostObj.text}</h4>
+          {fbPostObj.attachmentUrl ? (
+            <img
+              src={fbPostObj.attachmentUrl}
+              width="50px"
+              height="50px"
+              alt="photoPost"
+            />
+          ) : null}
           {isOwner ? (
             <>
               <button onClick={onDeleteClick}>Delete</button>
