@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { dbService, storageService } from "../fBase";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 const FbPost = ({ fbPostObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
@@ -26,36 +28,41 @@ const FbPost = ({ fbPostObj, isOwner }) => {
     setNewPost(value);
   };
   return (
-    <div key={fbPostObj.id}>
+    <div className="fbPost">
       {editing && isOwner ? (
         <>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={onSubmit} className="container fbPostEdit">
             <input
               onChange={onChange}
               type="text"
               placeholder="Revise your mind"
               value={newPost}
               required
+              autoFocus
+              className="formInput"
             />
-            <input type="submit" value="Edit" />
+            <input type="submit" value="Edit" className="formBtn" />
           </form>
-          <button onClick={toggleEditing}>Cancel</button>
+          <button onClick={toggleEditing} className="formBtn cancelBtn">
+            Cancel
+          </button>
         </>
       ) : (
         <>
           <h4>{fbPostObj.text}</h4>
           {fbPostObj.attachmentUrl ? (
-            <img
-              src={fbPostObj.attachmentUrl}
-              width="50px"
-              height="50px"
-              alt="photoPost"
-            />
+            <img src={fbPostObj.attachmentUrl} alt="photoPost" />
           ) : null}
           {isOwner ? (
             <>
-              <button onClick={onDeleteClick}>Delete</button>
-              <button onClick={toggleEditing}>Edit</button>
+              <div className="fbPost__actions">
+                <span onClick={onDeleteClick}>
+                  <FontAwesomeIcon icon={faTrash} />
+                </span>
+                <span onClick={toggleEditing}>
+                  <FontAwesomeIcon icon={faPencilAlt} />
+                </span>
+              </div>
             </>
           ) : null}
         </>

@@ -20,10 +20,9 @@ const Home = ({ userObj }) => {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <PostFactory userObj={userObj} />
-
-      <div>
+      <div style={{ marginTop: 30 }}>
         {fbPosts.map((fbPost) => (
           <FbPost
             key={fbPost.id}
