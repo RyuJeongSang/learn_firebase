@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/learn_firebase/static/css/main.8d69c411.chunk.css",
+    "main.js": "/learn_firebase/static/js/main.dfc49b52.chunk.js",
+    "main.js.map": "/learn_firebase/static/js/main.dfc49b52.chunk.js.map",
+    "runtime-main.js": "/learn_firebase/static/js/runtime-main.3851cc4b.js",
+    "runtime-main.js.map": "/learn_firebase/static/js/runtime-main.3851cc4b.js.map",
+    "static/js/2.b14f58a9.chunk.js": "/learn_firebase/static/js/2.b14f58a9.chunk.js",
+    "static/js/2.b14f58a9.chunk.js.map": "/learn_firebase/static/js/2.b14f58a9.chunk.js.map",
+    "index.html": "/learn_firebase/index.html",
+    "static/css/main.8d69c411.chunk.css.map": "/learn_firebase/static/css/main.8d69c411.chunk.css.map",
+    "static/js/2.b14f58a9.chunk.js.LICENSE.txt": "/learn_firebase/static/js/2.b14f58a9.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3851cc4b.js",
+    "static/js/2.b14f58a9.chunk.js",
+    "static/css/main.8d69c411.chunk.css",
+    "static/js/main.dfc49b52.chunk.js"
+  ]
+}
